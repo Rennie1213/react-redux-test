@@ -1,40 +1,72 @@
+const CREATE_COUNTER = 'CREATE_COUNTER';
 const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
 const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
 
 const initialState = {
-	count: 0
+	counters: {}
 };
 
-export function incrementCounter() {
+export function createCounter(id) {
 	return {
-		type: INCREMENT_COUNTER
+		type: CREATE_COUNTER,
+		id: id
 	};
 }
 
-
-export function decrementCounter() {
+export function incrementCounter(id) {
 	return {
-		type: DECREMENT_COUNTER
+		type: INCREMENT_COUNTER,
+		id: id
+	};
+}
+
+export function decrementCounter(id) {
+	return {
+		type: DECREMENT_COUNTER,
+		id: id
 	};
 }
 
 export function counterReducer(state, action) {
 	if(state == undefined) return initialState;
 
+	let counters = state.counters;
+
 	switch(action.type) {
+		case CREATE_COUNTER:
+
+			counters[action.id] = newCounter();
+
+			return {
+				counters: counters
+			}
+
 		case INCREMENT_COUNTER:
+
+			counters[action.id].count = ++counters[action.id].count; 
+
 			return {
-				count: ++state.count
+				counters: counters
 			};
+
 		case DECREMENT_COUNTER:
+
+			counters[action.id].count = --counters[action.id].count; 
+			
 			return {
-				count: --state.count
+				counters: counters
 			};
 	}
 
 	return state;
 }
 
-export function selectCounter(state) {
-	return state.count;
+export function selectCount(state, id) {
+	return state.counters[id] ? state.counters[id].count : 0;
+}
+
+function newCounter() {
+	return {
+		count: 0
+	}
 }

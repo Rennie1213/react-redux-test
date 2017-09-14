@@ -1,38 +1,14 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {
-	incrementCounter,
-	decrementCounter,
-	selectCounter
-} from '../store/counter';
+import {Counter} from './counter.jsx';
 
-class _App extends React.Component {
+export class App extends React.Component {
 	render() {
 		return ( 
 			<div>
-				<h2>{this.props.counter}</h2>
-
-				<button onClick={this.props.increment} type="button">+</button> 
-				<button onClick={this.props.decrement} type="button">-</button> 
+				<Counter id="test1" />
+				<Counter id="test2" />
+				<Counter id="test3" />
 			</div>
 		);
 	} 
 }
-
-export const App = connect(
-	(state, props) =>  {
-		return {
-			counter: selectCounter(state)
-		};
-	},
-	(dispatch, props) =>  {
-		return {
-			increment: () => {
-				dispatch(incrementCounter());
-			},
-			decrement: () => {
-				dispatch(decrementCounter());
-			}
-		};
-	}
-)(_App);
