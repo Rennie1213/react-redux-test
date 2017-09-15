@@ -4,12 +4,15 @@ import {
 	createCounter,
 	incrementCounter,
 	decrementCounter,
+	fetchCounter,
 	selectCount
 } from '../store/counter';
 
 class _Counter extends React.Component {
 	componentWillMount() {
-		this.props.create(this.props.id)
+		this.props.create(this.props.id);
+
+		this.props.test();
 	}
 
 	render() {
@@ -33,6 +36,9 @@ export const Counter = connect(
 	},
 	(dispatch, props) =>  {
 		return {
+			test: id => {
+				dispatch(fetchCounter())
+			},
 			create: id => {
 				dispatch(createCounter(id))
 			},

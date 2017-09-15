@@ -1,6 +1,10 @@
-const CREATE_COUNTER = 'CREATE_COUNTER';
+import axios from 'axios';
+
+const CREATE_COUNTER 	= 'CREATE_COUNTER';
 const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
 const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
+const FETCHING_COUNTER = 'FETCHING_COUNTER';
+const RECEIVED_COUNTER = 'RECEIVED_COUNTER';
 
 const initialState = {
 	counters: {}
@@ -24,6 +28,31 @@ export function decrementCounter(id) {
 	return {
 		type: DECREMENT_COUNTER,
 		id: id
+	};
+}
+
+export function fetchCounter() {
+	return dispatch => {
+		dispatch(fetchingCounter());
+
+		axios.get('https://api.github.com/users/rennie1213')
+		.then(resp => {
+			dispatch(receivedCounter(resp.data))
+		})
+	}
+}
+
+export function fetchingCounter(counter) {
+	return {
+		type: FETCHING_COUNTER,
+		counter: counter
+	};
+}
+
+export function receivedCounter(counter) {
+	return {
+		type: RECEIVED_COUNTER,
+		counter: counter
 	};
 }
 
