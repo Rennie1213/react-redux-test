@@ -2,11 +2,6 @@ import React from 'react';
 import {Counter} from './counter.jsx';
 
 export class App extends React.Component {
-	
-	componentWillMount() {
-		//do an Api call for some users    
-	}
-
 
 	render() {
 		return ( 

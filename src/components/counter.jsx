@@ -12,7 +12,7 @@ class _Counter extends React.Component {
 	componentWillMount() {
 		this.props.create(this.props.id);
 
-		this.props.test();
+		this.props.fetch();
 	}
 
 	render() {
@@ -36,7 +36,7 @@ export const Counter = connect(
 	},
 	(dispatch, props) =>  {
 		return {
-			test: id => {
+			fetch: id => {
 				dispatch(fetchCounter())
 			},
 			create: id => {

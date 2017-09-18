@@ -50,6 +50,8 @@ export function fetchingCounter(counter) {
 }
 
 export function receivedCounter(counter) {
+
+	console.log(counter);
 	return {
 		type: RECEIVED_COUNTER,
 		counter: counter

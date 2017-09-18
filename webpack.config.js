@@ -1,6 +1,7 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+	watch:   true,
 	devtool: 'source-map',
 	entry: './src/app.js',
 	output: {
